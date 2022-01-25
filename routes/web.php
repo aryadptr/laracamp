@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('pages.home');
 })->name('home');
 
-Route::get('/sign-in', function () {
-    return view('pages.login');
-})->name('sign-in');
+// Route::get('/sign-in', function () {
+//     return view('pages.login');
+// })->name('sign-in');
 
 Route::get('/checkout', function () {
     return view('pages.checkout');
@@ -29,6 +29,12 @@ Route::get('/success-checkout', function () {
     return view('pages.success-checkout');
 })->name('success-checkout');
 
+// Route::get('/dashboard', function () {
+//     return view('pages.dashboard');
+// })->name('dashboard');
+
 Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-})->name('dashboard');
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
