@@ -9,9 +9,18 @@ use Auth;
 class DashboardController extends Controller
 {
     public function index(){
-        $checkouts = Checkout::with('Camp')->whereUserId(Auth::id())->get();
-        return view('pages.dashboard', [
-            'checkouts' => $checkouts
-        ]);
+
+
+        switch (Auth::user()->isAdmin) {
+            case true:
+                return redirect(route('admin.dashboard'));
+                break;
+            default:
+                $checkouts = Checkout::with('Camp')->whereUserId(Auth::id())->get();
+                return view('pages.dashboard', [
+                    'checkouts' => $checkouts
+                ]);
+                break;
+        }
     }
 }
